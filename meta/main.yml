@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: Dan Hand (dsgnr)
+  description: Backup Cisco devices
+  company:
+
+  license: GPLv3
+
+  min_ansible_version: 2.7.x
+
+  platforms:
+    - name: Cisco
+      versions:
+        - all
+
+  galaxy_tags: []
+
+dependencies: []

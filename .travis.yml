@@ -1,0 +1,19 @@
+---
+language: python
+services: docker
+
+matrix:
+  include:
+    - os: linux
+      dist: xenial
+
+before_script:
+  - cd ../
+  - mv ansible-role-backup-cisco-switch cisco-backup
+  - cd cisco-backup
+
+install:
+  - pip install molecule docker
+
+script:
+  - molecule lint

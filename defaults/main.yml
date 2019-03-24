@@ -1,0 +1,3 @@
+---
+backup_dir: /backups/{{ inventory_hostname }}
+slack_channel: "{{ slack_api_key }}"

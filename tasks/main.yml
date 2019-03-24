@@ -1,0 +1,26 @@
+---
+
+- name: Show running config
+  ios_command:
+    commands: show run
+  register: show_run
+
+- name: Ensure backup directory exists
+  file:
+    name: "{{ backup_dir }}"
+    state: directory
+
+- name: Save running-config
+  copy:
+    content: "{{ show_run.stdout[0] }}"
+    dest: "{{ backup_dir }}/{{ inventory_hostname }}_{{ datetime }}.config.xml"
+
+- name: Notify Slack of successful backup
+  slack:
+    token: "{{ slack_api_key }}"
+    msg: "Cisco configuration backup succeeded for *{{ inventory_hostname }}* \n
+    Backup finished on: {{ ansible_date_time.date }} {{ ansible_date_time.time }}"
+    color: good
+    channel: "{{ slack_channel }}"
+    username: "Ansible on {{ inventory_hostname }}"
+    link_names: 0
